@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
     container: {
@@ -43,10 +43,30 @@ export const styles = StyleSheet.create({
         marginBottom: 22,
         marginLeft: 10,
     },
-    selectedDate:{
+    selectedDate: {
         marginLeft: 20,
         marginBottom: 16,
-        
-    }
- 
+
+    },
+    fullScreen: {
+        flex: 1,
+        backgroundColor: '#f9faf9', 
+    },
+    buttonContainer: {
+        position: 'absolute',
+        bottom: 200,
+        right: 50,
+        backgroundColor: '#e73623',
+        padding: 10,
+        borderRadius: 50, 
+        width: 50, 
+        height: 50, 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+    },
+    buttonText: {
+        color: 'white',
+        fontWeight: 'bold',
+    },
+
 });

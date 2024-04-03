@@ -1,10 +1,18 @@
 import React from 'react';
-import TodoListApp from './src/screens/TodoListApp';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import MainScreen from './src/screens/MainScreen';
+
+const Stack = createStackNavigator();
 
 const App = () => {
-  return (
-    <TodoListApp />
-  );
+    return (
+        <NavigationContainer>
+            <Stack.Navigator>
+                <Stack.Screen name="Accueil" component={MainScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 };
 
 export default App;
