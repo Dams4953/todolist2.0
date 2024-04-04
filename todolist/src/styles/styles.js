@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
     },
     buttonText: {
-        color: '#fff',
+        color: 'black',
         fontWeight: 'bold',
     },
     taskItem: {
@@ -49,14 +49,13 @@ export const styles = StyleSheet.create({
 
     },
     fullScreen: {
-        flex: 1,
-        backgroundColor: '#f9faf9', 
+        flex: 1, 
     },
     buttonContainer: {
-        position: 'absolute',
-        bottom: 200,
-        right: 50,
+        position: 'relative',
         backgroundColor: '#e73623',
+        top: 30,
+        left: 20,
         padding: 10,
         borderRadius: 50, 
         width: 50, 
@@ -68,5 +67,14 @@ export const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold',
     },
+    modalContainer:{
+        flex: 1,
+        justifyContent: 'center',
+    },
+    closeButton: {
+        fontSize: 50,
+        fontWeight: 'bold',
+        marginLeft: 20,
+    }
 
 });

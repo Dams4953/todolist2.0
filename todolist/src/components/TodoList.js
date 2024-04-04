@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 // Composant TodoList
-const TodoList = () => {
+const TodoList = ({onAddTask }) => {
     // Etats locaux
     const [task, setTask] = useState('');
     const [tasks, setTasks] = useState([]);
@@ -14,13 +14,12 @@ const TodoList = () => {
     const [selectedDate, setSelectedDate] = useState(null);
     const [editingTaskIndex, setEditingTaskIndex] = useState(null);
 
+
     // Fonction pour ajouter une nouvelle tâche à la liste
     const handleAddTask = () => {
         if (task.trim() === '') return;
-
-        const newTask = { text: task, date: selectedDate || null };
-        setTasks([...tasks, newTask]);
-        setTask('');
+        onAddTask(task); 
+        setTask(''); 
     };
 
     // Fonction pour supprimer une tâche de la liste
@@ -68,6 +67,7 @@ const TodoList = () => {
                 placeholder="Add a new task..."
                 value={task}
                 onChangeText={setTask}
+                placeholderTextColor="black"
             />
             <TouchableOpacity onPress={handleShowDatePicker} style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <View style={styles.dateIcon}>
@@ -80,7 +80,12 @@ const TodoList = () => {
                 mode="date"
                 onConfirm={handleConfirm}
                 onCancel={handleCancel}
+                textColor="black"
+                customConfirmButton={<Text style={{ color: 'blue' }}>Confirmer</Text>}
+                customCancelButton={<Text style={{ color: 'red' }}>Annuler</Text>}
             />
+
+
             <TouchableOpacity style={styles.addButton} onPress={handleAddTask}>
                 <Text >Add Task</Text>
             </TouchableOpacity>
