@@ -12,10 +12,11 @@ const TodoList = ({ tasks, onAddTask }) => {
 
     const handleAddTask = () => {
         if (task.trim() === '') return;
-        onAddTask({ text: task, description: description, date: selectedDate });
+        onAddTask({ text: task, description: description }, selectedDate); 
         setTask('');
         setDescription('');
     };
+    
 
     const handleShowDatePicker = () => {
         setDatePickerVisibility(true);
