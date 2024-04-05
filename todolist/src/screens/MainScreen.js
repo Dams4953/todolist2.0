@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { Modal, Text, TouchableOpacity, View, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native';
-import { styles } from '../styles/styles';
-import TodoList from '../components/TodoList';
+import React, { useState } from 'react';
+import { Modal, Text, TouchableOpacity, View, KeyboardAvoidingView, Platform, TouchableWithoutFeedback } from 'react-native';
+import { mainScreenStyles } from '../styles/mainScreenStyles';
+import TodoList from '../components/AddTask';
+import TaskItem from '../components/TaskItem';
 
 const MainScreen = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -15,17 +16,28 @@ const MainScreen = () => {
         setIsModalVisible(false);
     };
 
-    // Dans MainScreen
-    const handleAddTask = (task) => {
-        setTasks([...tasks, task]);
-        setIsModalVisible(false);
+    const handleAddTask = (newTask) => {
+        setTasks([...tasks, newTask]);
+        setIsModalVisible(false); 
     };
 
+    const handleDeleteTask = (index) => {
+        const updatedTasks = [...tasks];
+        updatedTasks.splice(index, 1);
+        setTasks(updatedTasks);
+    };
+
+    const handleUpdateTask = (index, newText, newDate) => {
+        const updatedTasks = [...tasks];
+        updatedTasks[index].text = newText;
+        updatedTasks[index].date = newDate;
+        setTasks(updatedTasks);
+    };
 
     return (
-        <View style={styles.fullScreen}>
-            <TouchableOpacity style={styles.buttonContainer} onPress={handleButtonPress}>
-                <Text style={styles.buttonText}>+</Text>
+        <View style={mainScreenStyles.fullScreen}>
+            <TouchableOpacity style={mainScreenStyles.buttonContainer} onPress={handleButtonPress}>
+                <Text style={mainScreenStyles.buttonText}>+</Text>
             </TouchableOpacity>
 
             <Modal
@@ -34,25 +46,32 @@ const MainScreen = () => {
                 transparent={true}
                 onRequestClose={handleCloseModal}
             >
-                <KeyboardAvoidingView
-                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                    style={styles.modalContainer}>
-
-                    <View style={styles.modalContent}>
-                        <TouchableOpacity onPress={handleCloseModal} style={styles.closeButton}>
-                            <Text>X</Text>
-                        </TouchableOpacity>
-                        <TodoList onAddTask={handleAddTask} />
-
+                <TouchableWithoutFeedback onPress={handleCloseModal}>
+                    <View style={mainScreenStyles.modalContainer}>
+                        <KeyboardAvoidingView
+                            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                            style={mainScreenStyles.modalContent}
+                        >
+                            <TodoList
+                                tasks={tasks}
+                                onAddTask={handleAddTask}
+                                onDeleteTask={handleDeleteTask}
+                                onUpdateTask={handleUpdateTask}
+                            />
+                        </KeyboardAvoidingView>
                     </View>
-
-                </KeyboardAvoidingView>
+                </TouchableWithoutFeedback>
             </Modal>
 
             {tasks.map((task, index) => (
-                <View key={index}>
-                    <Text>{task}</Text>
-                </View>
+                <TaskItem
+                    key={index}
+                    item={task}
+                    index={index}
+                    onDeleteTask={handleDeleteTask}
+                    onUpdateTask={handleUpdateTask}
+                    
+                />
             ))}
         </View>
     );

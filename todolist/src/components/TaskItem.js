@@ -1,44 +1,106 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, TextInput, Animated, Modal, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { styles } from '../styles/styles';
+import { taskItemStyles } from '../styles/taskItemStyles';
+import { Checkbox } from 'expo-checkbox';
 
-// Composant TaskItem
-const TaskItem = ({ item, index, onDeleteTask, onUpdateTask, isEditingDate, onShowDatePicker }) => {
-    // Etats locaux
+const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onShowDatePicker }) => {
     const [editedTask, setEditedTask] = useState(item.text);
+    const [editedDescription, setEditedDescription] = useState(item.description);
     const [editedDate, setEditedDate] = useState(item.date);
     const [isEditing, setIsEditing] = useState(false);
+    const [isChecked, setIsChecked] = useState(false);
+    const [showCheckAnimation, setShowCheckAnimation] = useState(false);
+    const [isTaskVisible, setIsTaskVisible] = useState(true);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [isDescriptionModalVisible, setIsDescriptionModalVisible] = useState(false);
+    const opacity = new Animated.Value(1);
 
-    // Fonction pour activer le mode édition de la tâche
+    const MAX_DESCRIPTION_LENGTH = 30;
+
+    useEffect(() => {
+        if (!isTaskVisible) {
+            Animated.timing(opacity, {
+                toValue: 0,
+                duration: 1000,
+                useNativeDriver: true
+            }).start(() => {
+                onDeleteTask(index);
+            });
+        }
+    }, [isTaskVisible]);
+
+    const toggleModal = () => {
+        setIsModalVisible(!isModalVisible);
+    };
+
     const handleEdit = () => {
         setIsEditing(true);
     };
 
-    // Fonction pour activer le mode édition de la date
     const handleEditDate = () => {
         setIsEditing(true);
         onShowDatePicker();
     };
 
-    // Fonction pour enregistrer les modifications de la tâche
     const handleSave = () => {
         setIsEditing(false);
+        setIsModalVisible(false);
         onUpdateTask(index, editedTask, editedDate);
     };
 
-    // Fonction pour annuler les modifications de la tâche
     const handleCancel = () => {
         setIsEditing(false);
+        setIsModalVisible(false);
         setEditedTask(item.text);
         setEditedDate(item.date);
     };
 
-    // Fonction pour rendre la vue de la tâche
+    const handleCheckBoxChange = () => {
+        setIsChecked(!isChecked);
+        setShowCheckAnimation(true);
+        if (!isChecked) {
+            setIsTaskVisible(false);
+        }
+    };
+
+    const handleTaskPress = () => {
+        toggleDescriptionModal();
+    };
+
+    const handleContainerPress = (event) => {
+        event.stopPropagation();
+    };
+
+
+    const renderCheckAnimation = () => {
+        return (
+            <Animated.View style={{ opacity: showCheckAnimation ? 1 : 0, position: 'absolute', right: 10 }}></Animated.View>
+        );
+    };
+
+    const toggleDescriptionModal = () => {
+        setIsDescriptionModalVisible(!isDescriptionModalVisible);
+    };
+
+    const renderDescription = () => {
+        if (editedDescription.length > MAX_DESCRIPTION_LENGTH) {
+            return (
+                <TouchableOpacity onPress={toggleDescriptionModal}>
+                    <Text style={taskItemStyles.taskDescription}>
+                        {editedDescription.substring(0, MAX_DESCRIPTION_LENGTH)}...
+                    </Text>
+                </TouchableOpacity>
+            );
+        } else {
+            return <Text style={taskItemStyles.taskDescription}>{editedDescription}</Text>;
+        }
+    };
+
     const renderTask = () => {
         return (
-            <View style={styles.taskItem}>
-                <TouchableOpacity style={styles.edit} onPress={handleEdit}>
+            <Animated.View style={[taskItemStyles.taskItem, { opacity: opacity }]}>
+                <TouchableOpacity style={taskItemStyles.edit} onPress={toggleModal}>
                     <Icon name="pencil" size={20} color="gray" />
                 </TouchableOpacity>
                 {isEditingDate && (
@@ -46,45 +108,83 @@ const TaskItem = ({ item, index, onDeleteTask, onUpdateTask, isEditingDate, onSh
                         <Icon name="calendar" size={20} color="blue" />
                     </TouchableOpacity>
                 )}
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Checkbox style={taskItemStyles.Checkbox}
+                    value={isChecked}
+                    onValueChange={handleCheckBoxChange}
+                />
                 <TouchableOpacity
-                    style={styles.taskTextContainer}
-                    onPress={handleEdit}
+                    onPress={handleTaskPress}
                 >
-                    <Text style={[styles.taskText, { fontWeight: 'bold' }]}>{item.text}</Text>
-                    <Text style={styles.taskDate}>{item.date ? new Date(item.date).toDateString() : ''}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.delete} onPress={() => onDeleteTask(index)}>
-                    <Icon name="trash-o" size={20} color="red" />
+                    <View style={taskItemStyles.containerTaskItem} onTouchStart={handleContainerPress}>
+                        <Text style={[taskItemStyles.taskText, { fontWeight: 'bold' }]}>{item.text}</Text>
+                        <Text style={taskItemStyles.taskDate}>{item.date ? new Date(item.date).toDateString() : ''}</Text>
+                        {renderDescription()}
+                    </View>
                 </TouchableOpacity>
             </View>
+            {renderCheckAnimation()}
+                {renderCheckAnimation()}
+                {renderEdit()}
+                {renderDescriptionModal()}
+            </Animated.View>
         );
     };
 
-    // Fonction pour rendre la vue d'édition de la tâche
     const renderEdit = () => {
-    return (
-        <View style={styles.taskItem}>
-            <TextInput
-                style={[styles.input, styles.inputEditing]}
-                value={editedTask}
-                onChangeText={setEditedTask}
-            />
-            <TouchableOpacity onPress={handleSave}>
-                <Icon name="check" size={20} color="green" />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleCancel}>
-                <Icon name="times" size={20} color="red" />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={handleEditDate}>
-                <Icon name="calendar" size={20} color="blue" />
-            </TouchableOpacity>
-            <Text style={styles.taskDate}>{editedDate ? new Date(editedDate).toDateString() : ''}</Text>
-        </View>
-    );
-};
+        return (
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={isModalVisible}
+                onRequestClose={toggleModal}
+            >
+                <View style={taskItemStyles.centeredView}>
+                    <View style={taskItemStyles.modalView}>
+                        <TextInput
+                            style={[taskItemStyles.input, taskItemStyles.inputEditing]}
+                            value={editedTask}
+                            onChangeText={setEditedTask}
+                        />
+                        <TouchableOpacity onPress={handleSave}>
+                            <Icon name="check" size={20} color="gray" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={handleCancel}>
+                            <Icon name="times" size={20} color="gray" />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={handleEditDate}>
+                            <Icon name="calendar" size={20} color="blue" />
+                        </TouchableOpacity>
+                        <Text style={taskItemStyles.taskDate}>{editedDate ? new Date(editedDate).toDateString() : ''}</Text>
+                        <TouchableOpacity onPress={toggleModal} style={taskItemStyles.closeButton}>
+                            <Text style={taskItemStyles.textStyle}>Close</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+        );
+    };
+    const renderDescriptionModal = () => {
+        return (
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={isDescriptionModalVisible}
+                onRequestClose={toggleDescriptionModal}
+            >
+                <View style={taskItemStyles.modalContainer}>
+                    <View style={taskItemStyles.modalContent}>
+                        <Text style={taskItemStyles.modalDescription}>{editedDescription}</Text>
+                        <TouchableOpacity onPress={toggleDescriptionModal} style={taskItemStyles.closeButton}>
+                            <Text style={taskItemStyles.closeButtonText}>Close</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+        );
+    };
 
-// Rendu conditionnel en fonction du mode d'édition
-return isEditing ? renderEdit() : renderTask();
+    return isEditing ? renderEdit() : renderTask();
 };
 
 export default TaskItem;

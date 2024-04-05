@@ -9,7 +9,7 @@ const App = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                <Stack.Screen name="Accueil" component={MainScreen} />
+                <Stack.Screen name="To do list" component={MainScreen} />
             </Stack.Navigator>
         </NavigationContainer>
     );
