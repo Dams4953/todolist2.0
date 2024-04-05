@@ -6,7 +6,6 @@ const AgendaScreen = () => {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Calendrier de l'agenda</Text>
-      {/* Ajoutez votre composant de calendrier ici */}
     </View>
   );
 };

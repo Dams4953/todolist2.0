@@ -85,9 +85,8 @@ const MainScreen = () => {
     const handleTabPress = (tabName) => {
         setSelectedTab(tabName);
         if (tabName === 'Agenda') {
-            navigation.navigate('Agenda'); // Naviguer vers la page de l'agenda
+            navigation.navigate('Agenda');
         }
-        // Vous pouvez ajouter d'autres actions spécifiques pour chaque onglet ici
     };
 
     return (
