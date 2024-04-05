@@ -49,22 +49,6 @@ export const mainScreenStyles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
       },
-      tabContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        backgroundColor: '#171c1a',
-        paddingVertical: 25,
-      },
-      tabText: {
-        fontSize: 18,
-        marginBottom: 60,
-        color: 'white',
-      },
-      selectedTabText: {
-        fontWeight: 'bold',
-        marginBottom: 60,
-        color: '#e73623',
-      },
+    
 });
 
