@@ -1,4 +1,3 @@
-// MainScreen.js
 import React, { useState } from 'react';
 import { Modal, Text, TouchableOpacity, View, KeyboardAvoidingView, Platform, TouchableWithoutFeedback } from 'react-native';
 import { mainScreenStyles } from '../styles/mainScreenStyles';
