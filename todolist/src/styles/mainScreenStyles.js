@@ -17,8 +17,8 @@ export const mainScreenStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: 35,
-    right: 20,
+    bottom: 30,
+    right: 175,
   },
     buttonText: {
         color: 'white',
@@ -39,6 +39,7 @@ export const mainScreenStyles = StyleSheet.create({
         alignItems: 'center',
         padding: 10,
         backgroundColor: '#171c1a',
+        marginBottom: 20,
       },
       navigationButtonText: {
         fontSize: 30,

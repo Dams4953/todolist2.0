@@ -3,9 +3,19 @@ import { StyleSheet } from 'react-native';
 export const taskItemStyles = StyleSheet.create({
     taskItem: {
         paddingVertical: 20,
-        marginTop: 10,
+        marginTop: 0,
         backgroundColor: '#fafafa',
         paddingBottom: 0,
+        borderRadius: 30,
+        margin: 20,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
     },
     taskText: {
         marginLeft: 20,
@@ -22,7 +32,7 @@ export const taskItemStyles = StyleSheet.create({
         bottom: 30,
     },
     edit: {
-        left: 360,
+        left: 320,
         bottom: 19,
         marginTop: 11,
     },
