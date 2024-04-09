@@ -17,8 +17,9 @@ export const mainScreenStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: 30,
+    bottom: -40,
     right: 175,
+    zIndex: 999,
   },
     buttonText: {
         color: 'white',

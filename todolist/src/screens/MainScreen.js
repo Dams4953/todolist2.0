@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
-import { Modal, Text, TouchableOpacity, View, KeyboardAvoidingView, Platform, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView , Modal, TouchableWithoutFeedback, KeyboardAvoidingView, Platform } from 'react-native';
 import { mainScreenStyles } from '../styles/mainScreenStyles';
 import TodoList from '../components/AddTask';
 import TaskListByDate from '../utils/dateUtils';
-import AgendaScreen from './AgendaScreen';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, useNavigation } from '@react-navigation/native';
-
-const Tab = createBottomTabNavigator();
+import { useTaskContext } from '../utils/TaskContext';
 
 const MainScreen = () => {
+    const { tasks, setTasks, selectedDate } = useTaskContext();
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [tasks, setTasks] = useState([]);
     const [currentDate, setCurrentDate] = useState(new Date());
-    const [selectedTab, setSelectedTab] = useState('Accueil');
-    const navigation = useNavigation();
+    const [task, setTask] = useState('');
+    const [selectedDay, setSelectedDay] = useState('');
 
     const getDateLabel = (date) => {
         const today = new Date();
@@ -81,57 +77,51 @@ const MainScreen = () => {
         setCurrentDate(previousDay);
     };
 
-    const handleTabPress = (tabName) => {
-        setSelectedTab(tabName);
-        if (tabName === 'Agenda') {
-            navigation.navigate('Agenda');
-        }
-    };
-
     return (
-                    <View style={mainScreenStyles.fullScreen}>
-                        <View style={mainScreenStyles.contentContainer}>
-                            <View style={mainScreenStyles.dateNavigationContainer}>
-                                <TouchableOpacity onPress={goToPreviousDay}>
-                                    <Text style={mainScreenStyles.navigationButtonText}>{"<"}</Text>
-                                </TouchableOpacity>
-                                <Text style={mainScreenStyles.dateText}>{getDateLabel(currentDate)}</Text>
-                                <TouchableOpacity onPress={goToNextDay}>
-                                    <Text style={mainScreenStyles.navigationButtonText}>{">"}</Text>
-                                </TouchableOpacity>
-                            </View>
-
-                            <TouchableOpacity style={mainScreenStyles.buttonContainer} onPress={handleButtonPress}>
-                                <Text style={mainScreenStyles.buttonText}>+</Text>
-                            </TouchableOpacity>
-
-                            <Modal
-                                visible={isModalVisible}
-                                animationType="fade"
-                                transparent={true}
-                                onRequestClose={handleCloseModal}
-                            >
-                                <TouchableWithoutFeedback onPress={handleCloseModal}>
-                                    <View style={mainScreenStyles.modalContainer}>
-                                        <KeyboardAvoidingView
-                                            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                                            style={mainScreenStyles.modalContent}
-                                        >
-                                            <TodoList
-                                                tasks={tasks}
-                                                onAddTask={handleAddTask}
-                                                onDeleteTask={handleDeleteTask}
-                                                onUpdateTask={handleUpdateTask}
-                                            />
-                                        </KeyboardAvoidingView>
-                                    </View>
-                                </TouchableWithoutFeedback>
-                            </Modal>
-
-                            <TaskListByDate date={currentDate} tasks={tasks} onUpdateTask={handleUpdateTask} onDeleteTask={handleDeleteTask} />
-                        </View>
+        <View style={mainScreenStyles.fullScreen}>
+            <TouchableOpacity style={mainScreenStyles.buttonContainer} onPress={handleButtonPress}>
+                <Text style={mainScreenStyles.buttonText}>+</Text>
+            </TouchableOpacity>
+            <ScrollView>
+                <View style={mainScreenStyles.contentContainer}>
+                    <View style={mainScreenStyles.dateNavigationContainer}>
+                        <TouchableOpacity onPress={goToPreviousDay}>
+                            <Text style={mainScreenStyles.navigationButtonText}>{"<"}</Text>
+                        </TouchableOpacity>
+                        <Text style={mainScreenStyles.dateText}>{getDateLabel(currentDate)}</Text>
+                        <TouchableOpacity onPress={goToNextDay}>
+                            <Text style={mainScreenStyles.navigationButtonText}>{">"}</Text>
+                        </TouchableOpacity>
                     </View>
-                
+
+                    <Modal
+                        visible={isModalVisible}
+                        animationType="fade"
+                        transparent={true}
+                        onRequestClose={handleCloseModal}
+                    >
+                        <TouchableWithoutFeedback onPress={handleCloseModal}>
+                            <View style={mainScreenStyles.modalContainer}>
+                                <KeyboardAvoidingView
+                                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                                    style={mainScreenStyles.modalContent}
+                                >
+                                    <Text>{selectedDay}</Text>
+                                    <TodoList
+                                        tasks={tasks}
+                                        onAddTask={handleAddTask}
+                                        onDeleteTask={handleDeleteTask}
+                                        onUpdateTask={handleUpdateTask}
+                                    />
+                                </KeyboardAvoidingView>
+                            </View>
+                        </TouchableWithoutFeedback>
+                    </Modal>
+
+                    <TaskListByDate date={currentDate} tasks={tasks} onUpdateTask={handleUpdateTask} onDeleteTask={handleDeleteTask} />
+                </View>
+            </ScrollView>
+        </View>
     );
 };
 
