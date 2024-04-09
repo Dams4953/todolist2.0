@@ -24,9 +24,16 @@
 
 ### Langages
 
+[![React Native](https://img.shields.io/badge/React_Native-%2361DAFB.svg?style=flat-square&logo=react&logoColor=white)](https://reactnative.dev/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-%23F7DF1E.svg?style=flat-square&logo=javascript&logoColor=black)](https://www.javascript.com/)
+[![CSS3](https://img.shields.io/badge/CSS3-%231572B6.svg?style=flat-square&logo=css3&logoColor=white)](https://www.w3.org/Style/CSS/)
+
 ### Outils
 
-
+- [Git](https://git-scm.com/)
+- [Visual Studio Code](https://code.visualstudio.com/)
+- [Android Studio](https://developer.android.com/studio?hl=fr)
+- [Expo Go](https://expo.dev/go) 
 
 
 
