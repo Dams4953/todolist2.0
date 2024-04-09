@@ -18,7 +18,7 @@
 
 ## 📌 Dépendances
 
-Besoin de expo go sur mobile ou un émulateur sur pc (ex : Android Studio)
+Besoin de Expo Go sur mobile ou un émulateur sur pc (ex : Android Studio)
 
 - <code>npm install @react-native-community/checkbox</code> Composant pour créer des cases à cocher dans React Native.
     
