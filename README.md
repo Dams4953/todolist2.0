@@ -1,6 +1,6 @@
 # todolist2.0
 
-# 🛠 En cours de dévelopmment 🛠
+# 🛠 En cours de dévelopemment 🛠
 
 ### Sommaire
 
