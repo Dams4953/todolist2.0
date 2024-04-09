@@ -18,6 +18,8 @@
 
 ## 📌 Dépendances
 
+Besoin de expo go sur mobile ou un émulateur sur pc (ex : Android Studio)
+
 - <code>npm install @react-native-community/checkbox</code> Composant pour créer des cases à cocher dans React Native.
     
 - <code>npm install @react-native-community/datetimepicker</code> Composant de sélection de date et d'heure pour React Native.
