@@ -5,20 +5,21 @@ export const mainScreenStyles = StyleSheet.create({
      fullScreen: {
     flex: 1,
     justifyContent: 'space-between',
+    backgroundColor: '#e8e8e8',
   },
   contentContainer: {
     flex: 1,
   },
   buttonContainer: {
-    backgroundColor: '#e73623',
+    backgroundColor: '#5396ac',
     borderRadius: 25,
     width: 50,
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: -40,
-    right: 175,
+    bottom: 50,
+    right: 60,
     zIndex: 999,
   },
     buttonText: {
@@ -35,22 +36,33 @@ export const mainScreenStyles = StyleSheet.create({
         marginLeft: 20,
     },
     dateNavigationContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        padding: 10,
-        backgroundColor: '#171c1a',
-        marginBottom: 20,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      padding: 12,
+      backgroundColor: '#16272d',
+      marginBottom: 20,
+      shadowColor: '#000',
+      shadowOffset: {
+        width: 0,
+        height: 2,
       },
-      navigationButtonText: {
-        fontSize: 30,
-        color: 'white',
-      },
-      dateText: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        color: 'white',
-      },
+      shadowOpacity: 0.25,
+      shadowRadius: 3.84,
+      elevation: 5,
+    },
+    navigationButtonText: {
+      fontSize: 28, 
+      color: '#5396ac',
+      fontWeight: 'bold', 
+      textTransform: 'uppercase', 
+    },
+    dateText: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: '#5396ac',
+    },
+    
     
 });
 

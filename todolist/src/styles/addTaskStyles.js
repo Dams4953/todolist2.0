@@ -18,11 +18,12 @@ export const addTaskStyles = StyleSheet.create({
         borderRadius: 20,
     },
     addButton: {
-        backgroundColor: '#e73623',
+        backgroundColor: '#5396ac',
         padding: 10,
         borderRadius: 5,
         alignItems: 'center',
         borderRadius: 20,
+        marginTop: 20,
     },
     addButtonText: {
         color: 'white',
@@ -31,14 +32,22 @@ export const addTaskStyles = StyleSheet.create({
         marginBottom: 22,
         marginLeft: 10,
     },
-    dateIcon: {
-        marginBottom: 20,
-        marginLeft: 25,
-    },
     calendarText: {
         color: 'blue',
         textDecorationLine: 'underline',
         marginBottom: 16,
         marginRight: 50,
+    },
+    colorOptions: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20,
+    },
+    colorOption: {
+        width: 40,
+        height: 40,
+        borderRadius: 20,
+        borderWidth: 2,
+        marginHorizontal: 5,
     },
 });

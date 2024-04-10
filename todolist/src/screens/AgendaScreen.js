@@ -22,19 +22,11 @@ const AgendaScreen = () => {
     setSelectedDay(selectedDate);
   };
 
-  const customDayStyle = {
-    selected: {
-      backgroundColor: 'blue',
-      borderRadius: 16,
-    },
-  };
-  
-
   const calendarTheme = {
-    selectedDayBackgroundColor: '#e73623',
+    selectedDayBackgroundColor: '#5396ac',
     selectedDayTextColor: 'white',
-    todayTextColor: '#e73623',
-    arrowColor: '#e73623',
+    todayTextColor: '#5396ac',
+    arrowColor: '#5396ac',
   };
 
   return (

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, ScrollView , Modal, TouchableWithoutFeedback, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView, Modal, TouchableWithoutFeedback, KeyboardAvoidingView, Platform } from 'react-native';
 import { mainScreenStyles } from '../styles/mainScreenStyles';
 import TodoList from '../components/AddTask';
 import TaskListByDate from '../utils/dateUtils';
@@ -11,6 +11,8 @@ const MainScreen = () => {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [task, setTask] = useState('');
     const [selectedDay, setSelectedDay] = useState('');
+    const [selectedColor, setSelectedColor] = useState('#e73623');
+
 
     const getDateLabel = (date) => {
         const today = new Date();
@@ -36,6 +38,10 @@ const MainScreen = () => {
 
             return `${dayOfWeek} ${dayOfMonth} ${month} ${year}`;
         }
+    };
+
+    const handleColorSelect = (color) => {
+        setSelectedColor(color);
     };
 
     const handleButtonPress = () => {
@@ -112,13 +118,15 @@ const MainScreen = () => {
                                         onAddTask={handleAddTask}
                                         onDeleteTask={handleDeleteTask}
                                         onUpdateTask={handleUpdateTask}
+                                        onColorSelect={handleColorSelect}
                                     />
                                 </KeyboardAvoidingView>
                             </View>
                         </TouchableWithoutFeedback>
                     </Modal>
 
-                    <TaskListByDate date={currentDate} tasks={tasks} onUpdateTask={handleUpdateTask} onDeleteTask={handleDeleteTask} />
+                    <TaskListByDate date={currentDate} tasks={tasks} onUpdateTask={handleUpdateTask} onDeleteTask={handleDeleteTask} selectedColor={selectedColor} />
+
                 </View>
             </ScrollView>
         </View>

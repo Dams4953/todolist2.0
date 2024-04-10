@@ -69,7 +69,7 @@ export const taskItemStyles = StyleSheet.create({
     },
     closeButtonText: {
         fontSize: 16,
-        color: '#e73623',
+        color: '#5396ac',
     },
     centeredView: {
         flex: 1,
@@ -111,6 +111,14 @@ export const taskItemStyles = StyleSheet.create({
         backgroundColor: '#f0f0f0', 
         color: 'black',
         borderRadius: 10,
+    },
+    colorCircle: {
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        position: 'absolute',
+        bottom: 15,
+        left: 280,
     },
 });
 

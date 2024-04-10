@@ -9,14 +9,16 @@ const TodoList = ({ tasks, onAddTask }) => {
     const [description, setDescription] = useState('');
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedColor, setSelectedColor] = useState('#e73623');
+
+    const colors = ['#e73623', '#1f85e5', '#57c75e', '#f6b93b']; 
 
     const handleAddTask = () => {
         if (task.trim() === '') return;
-        onAddTask({ text: task, description: description }, selectedDate); 
+        onAddTask({ text: task, description: description, color: selectedColor }, selectedDate);
         setTask('');
         setDescription('');
     };
-    
 
     const handleShowDatePicker = () => {
         setDatePickerVisibility(true);
@@ -29,6 +31,10 @@ const TodoList = ({ tasks, onAddTask }) => {
 
     const handleCancel = () => {
         setDatePickerVisibility(false);
+    };
+
+    const handleColorSelect = (color) => {
+        setSelectedColor(color);
     };
 
     return (
@@ -62,6 +68,12 @@ const TodoList = ({ tasks, onAddTask }) => {
                 customConfirmButton={<Text style={{ color: 'blue' }}>Confirmer</Text>}
                 customCancelButton={<Text style={{ color: 'red' }}>Annuler</Text>}
             />
+
+            <View style={addTaskStyles.colorOptions}>
+                {colors.map((color, index) => (
+                    <TouchableOpacity key={index} style={[addTaskStyles.colorOption, { backgroundColor: color, borderColor: selectedColor === color ? 'black' : 'transparent' }]} onPress={() => handleColorSelect(color)} />
+                ))}
+            </View>
 
             <TouchableOpacity style={addTaskStyles.addButton} onPress={handleAddTask}>
                 <Text style={addTaskStyles.addButtonText}>Ajouter tâche</Text>

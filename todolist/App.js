@@ -13,12 +13,12 @@ const App = () => {
             <NavigationContainer>
                 <Tab.Navigator
                     screenOptions={{
-                        tabBarActiveTintColor: '#e73623',
+                        tabBarActiveTintColor: '#5396ac',
                         tabBarStyle: {
                             flexDirection: 'row',
                             justifyContent: 'space-around',
                             alignItems: 'center',
-                            backgroundColor: '#171c1a',
+                            backgroundColor: '#16272d',
                             height: 125,
                             paddingBottom: 40,
                         },

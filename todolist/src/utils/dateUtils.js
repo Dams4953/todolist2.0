@@ -1,8 +1,9 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import TaskItem from '../components/TaskItem';
+import onColorSelect from '../screens/MainScreen';
 
-const TaskListByDate = ({ date, tasks, onUpdateTask, onDeleteTask }) => {
+const TaskListByDate = ({ date, tasks, onUpdateTask, onDeleteTask, selectedColor }) => {
     const tasksToShow = tasks.filter(task => task.date.toDateString() === date.toDateString());
 
     return (
@@ -12,11 +13,14 @@ const TaskListByDate = ({ date, tasks, onUpdateTask, onDeleteTask }) => {
                     <TaskItem
                         item={task}
                         index={index}
-                        onUpdateTask={onUpdateTask} 
+                        onUpdateTask={onUpdateTask}
                         onDeleteTask={onDeleteTask}
-                        isEditingDate={false} 
-                        onShowDatePicker={() => { }} 
+                        isEditingDate={false}
+                        onShowDatePicker={() => { }}
+                        selectedColor={selectedColor}
+                        onColorSelect={onColorSelect}
                     />
+
                 </View>
             ))}
         </View>

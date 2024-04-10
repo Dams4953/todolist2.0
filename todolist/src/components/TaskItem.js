@@ -1,10 +1,12 @@
+// TaskItem.js
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, TextInput, Animated, Modal } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { taskItemStyles } from '../styles/taskItemStyles';
 import { Checkbox } from 'expo-checkbox';
 
-const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onShowDatePicker }) => {
+const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onShowDatePicker, selectedColor }) => {
     // États locaux
     const [editedTask, setEditedTask] = useState(item.text);
     const [editedDescription, setEditedDescription] = useState(item.description);
@@ -84,7 +86,6 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
         event.stopPropagation();
     };
 
-
     // Fonction pour afficher l'animation de la coche
     const renderCheckAnimation = () => {
         return (
@@ -128,10 +129,15 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
                 )}
                 {/* Case à cocher et contenu de la tâche */}
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Checkbox style={taskItemStyles.Checkbox}
+                    <Checkbox
+                        style={taskItemStyles.Checkbox}
                         value={isChecked}
                         onValueChange={handleCheckBoxChange}
                     />
+                    {/* Cercle de couleur */}
+                    <TouchableOpacity onPress={handleTaskPress}>
+                        <View style={[taskItemStyles.colorCircle, { backgroundColor: selectedColor }]}></View>
+                    </TouchableOpacity>
                     <TouchableOpacity onPress={handleTaskPress}>
                         <View style={taskItemStyles.containerTaskItem} onTouchStart={handleContainerPress}>
                             <Text style={[taskItemStyles.taskText, { fontWeight: 'bold' }]}>{item.text}</Text>
