@@ -119,7 +119,7 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
             <Animated.View style={[taskItemStyles.taskItem, { opacity: opacity }]}>
                 {/* Bouton d'édition */}
                 <TouchableOpacity style={taskItemStyles.edit} onPress={toggleModal}>
-                    <Icon name="pencil" size={20} color="gray" />
+                    <Icon name="pencil" size={20} color="#5396ac" />
                 </TouchableOpacity>
                 {/* Bouton de calendrier */}
                 {isEditingDate && (

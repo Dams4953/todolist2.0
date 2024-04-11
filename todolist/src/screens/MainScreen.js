@@ -85,9 +85,6 @@ const MainScreen = () => {
 
     return (
         <View style={mainScreenStyles.fullScreen}>
-            <TouchableOpacity style={mainScreenStyles.buttonContainer} onPress={handleButtonPress}>
-                <Text style={mainScreenStyles.buttonText}>+</Text>
-            </TouchableOpacity>
             <ScrollView>
                 <View style={mainScreenStyles.contentContainer}>
                     <View style={mainScreenStyles.dateNavigationContainer}>

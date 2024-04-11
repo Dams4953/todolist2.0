@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export const mainScreenStyles = StyleSheet.create({
 
-     fullScreen: {
+  fullScreen: {
     flex: 1,
     justifyContent: 'space-between',
     backgroundColor: '#e8e8e8',
@@ -18,51 +18,51 @@ export const mainScreenStyles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     position: 'absolute',
-    bottom: 50,
-    right: 60,
+    bottom: 100,
+    borderWidth: 5,
+    borderStyle: 'solid',
+    borderColor: 'white',
+    right: 171,
     zIndex: 999,
   },
-    buttonText: {
-        color: 'white',
-        fontSize: 30,
-    },
-    modalContainer:{
-        flex: 1,
-        justifyContent: 'center',
-    },
-    closeButton: {
-        fontSize: 50,
-        fontWeight: 'bold',
-        marginLeft: 20,
-    },
-    dateNavigationContainer: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      padding: 12,
-      backgroundColor: '#16272d',
-      marginBottom: 20,
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-      elevation: 5,
-    },
-    navigationButtonText: {
-      fontSize: 28, 
-      color: '#5396ac',
-      fontWeight: 'bold', 
-      textTransform: 'uppercase', 
-    },
-    dateText: {
-      fontSize: 20,
-      fontWeight: 'bold',
-      color: '#5396ac',
-    },
-    
-    
+  buttonText: {
+    color: 'white',
+    fontSize: 30,
+  },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  closeButton: {
+    fontSize: 50,
+    fontWeight: 'bold',
+    marginLeft: 20,
+  },
+  dateNavigationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 12,
+    backgroundColor: '#FFFFFF',
+    marginBottom: 20,
+
+  },
+  navigationButtonText: {
+    fontSize: 36,
+    color: '#5396ac',
+    textTransform: 'uppercase',
+    paddingTop: 50,
+    paddingBottom: 2,
+    paddingRight: 20,
+    paddingLeft: 20,
+  },
+  dateText: {
+    fontSize: 20,
+    color: 'gray',
+    paddingTop: 50,
+    paddingBottom: 2,
+  },
+
+
 });
 

@@ -2,45 +2,41 @@ import { StyleSheet } from 'react-native';
 
 export const taskItemStyles = StyleSheet.create({
     taskItem: {
-        paddingVertical: 20,
+        paddingVertical: 5,
         marginTop: 0,
         backgroundColor: '#fafafa',
         paddingBottom: 0,
-        borderRadius: 30,
         margin: 20,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
+        marginLeft: 0,
+        borderTopRightRadius: 30,
+        borderBottomRightRadius: 30,
+
     },
     taskText: {
         marginLeft: 20,
-        bottom: 30,
+        bottom: 15,
     },
     taskDate: {
         marginLeft: 20,
-        bottom: 63,
+        bottom: 48,
         fontSize: 12,
         fontStyle: 'italic',
     },
     taskDescription: {
         marginLeft: 20,
-        bottom: 30,
+        bottom: 25,
     },
     edit: {
-        left: 320,
-        bottom: 19,
+        left: 310,
+        top: 14,
         marginTop: 11,
     },
     Checkbox: {
-        marginLeft: 20,
-        bottom: 26,
-        width: 30,
-        height: 30,
+        marginLeft: 25,
+        marginRight: -10,
+        bottom: 20,
+        width: 25,
+        height: 25,
     },
     containerTaskItem: {
         marginLeft: 15,
@@ -117,8 +113,8 @@ export const taskItemStyles = StyleSheet.create({
         height: 20,
         borderRadius: 10,
         position: 'absolute',
-        bottom: 15,
-        left: 280,
+        bottom: 10,
+        left: 300,
     },
 });
 

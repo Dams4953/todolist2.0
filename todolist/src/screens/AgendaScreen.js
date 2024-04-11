@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
   },
   calendar: {
     marginBottom: 20,
+    paddingTop: 60,
   },
   dateText: {
     fontSize: 18,
