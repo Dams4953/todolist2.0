@@ -1,6 +1,6 @@
 # 🛠 En cours de dévelopemment 🛠
 
-# todoliste mobile
+# mobile todolist
 
 ### Sommaire
 
