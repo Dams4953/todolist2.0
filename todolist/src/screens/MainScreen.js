@@ -13,7 +13,6 @@ const MainScreen = () => {
     const [selectedDay, setSelectedDay] = useState('');
     const [selectedColor, setSelectedColor] = useState('#e73623');
 
-
     const getDateLabel = (date) => {
         const today = new Date();
         const tomorrow = new Date();
@@ -40,6 +39,13 @@ const MainScreen = () => {
         }
     };
 
+    const handleAddTask = (newTask) => {
+        setTasks([...tasks, newTask]);
+        setIsModalVisible(false);
+    };
+    
+
+
     const handleColorSelect = (color) => {
         setSelectedColor(color);
     };
@@ -49,12 +55,6 @@ const MainScreen = () => {
     };
 
     const handleCloseModal = () => {
-        setIsModalVisible(false);
-    };
-
-    const handleAddTask = (newTask, selectedDate) => {
-        const taskWithDate = { ...newTask, date: selectedDate };
-        setTasks([...tasks, taskWithDate]);
         setIsModalVisible(false);
     };
 
@@ -96,6 +96,12 @@ const MainScreen = () => {
                             <Text style={mainScreenStyles.navigationButtonText}>{">"}</Text>
                         </TouchableOpacity>
                     </View>
+                    <TaskListByDate
+                        date={currentDate}
+                        tasks={tasks}
+                        onUpdateTask={handleUpdateTask}
+                        onDeleteTask={handleDeleteTask}
+                    />
 
                     <Modal
                         visible={isModalVisible}
@@ -109,20 +115,20 @@ const MainScreen = () => {
                                     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                                     style={mainScreenStyles.modalContent}
                                 >
-                                    <Text>{selectedDay}</Text>
                                     <TodoList
-                                        tasks={tasks}
                                         onAddTask={handleAddTask}
-                                        onDeleteTask={handleDeleteTask}
-                                        onUpdateTask={handleUpdateTask}
-                                        onColorSelect={handleColorSelect}
+                                        onClose={handleCloseModal}
+                                        selectedDate={selectedDate}
+                                        setSelectedDate={setSelectedDay}
+                                        selectedColor={selectedColor}
+                                        setSelectedColor={setSelectedColor}
                                     />
                                 </KeyboardAvoidingView>
                             </View>
                         </TouchableWithoutFeedback>
                     </Modal>
 
-                    <TaskListByDate date={currentDate} tasks={tasks} onUpdateTask={handleUpdateTask} onDeleteTask={handleDeleteTask} selectedColor={selectedColor} />
+                   
 
                 </View>
             </ScrollView>

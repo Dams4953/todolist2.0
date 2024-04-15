@@ -11,18 +11,21 @@ const Tab = createBottomTabNavigator();
 
 const App = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [tasks, setTasks] = useState([]);
 
-    const handleAddTask = () => {
-        setIsModalVisible(true);
+    const handleAddTask = (newTask) => {
+        setTasks([...tasks, newTask]);
+        setIsModalVisible(false);
     };
 
     return (
         <TaskProvider>
             <NavigationContainer>
                 <View style={styles.container}>
-                    <CustomButton onPress={handleAddTask} />
+                    <CustomButton onPress={() => setIsModalVisible(true)} />
                     {isModalVisible && (
-                        <AddTask onClose={() => setIsModalVisible(false)} />
+                        <AddTask onAddTask={handleAddTask} onClose={() => setIsModalVisible(false)} />
+
                     )}
                 </View>
                 <Tab.Navigator
@@ -41,15 +44,17 @@ const App = () => {
                 >
                     <Tab.Screen
                         name="Accueil"
-                        component={MainScreen}
-                        options={({ route }) => ({
+                        options={{
                             tabBarLabel: ({ color, focused }) => (
                                 <Text style={{ color, fontWeight: focused ? 'bold' : 'normal', fontSize: 22 }}>
                                     Accueil
                                 </Text>
                             ),
-                        })}
-                    />
+                        }}
+                    >
+                        {({ route }) => <MainScreen handleAddTask={handleAddTask} />}
+                    </Tab.Screen>
+
                     <Tab.Screen
                         name="Agenda"
                         component={AgendaScreen}
@@ -80,8 +85,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 18,
         top: 100,
-        
-
         zIndex: 999,
     },
     buttonContainer: {
@@ -93,6 +96,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         top: 600,
         left: 150,
+        borderWidth: 5,
+        borderStyle: 'solid',
+        borderColor: '#FFFFFF',
     },
     buttonText: {
         fontSize: 24,
