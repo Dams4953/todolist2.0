@@ -14,7 +14,11 @@
 
 ### Description
 
+Une application mobile de gestion de tâches incontournable, offrant une expérience fluide pour créer, organiser et suivre votre liste de tâches où que vous soyez. Priorisez vos engagements et restez productif avec cette todolist intuitive et pratique.
+
 ### Captures d'Écran
+
+<img src="img1_github.jpg" alt="Capture d'écran de l'application" width="300"> <img src="img2_github.jpg" alt="Capture d'écran de l'application" width="300">
 
 ## 📌 Dépendances
 
@@ -57,6 +61,11 @@ Besoin de Expo Go sur mobile ou un émulateur sur pc (ex : Android Studio)
 <code>npx expo start</code> pour lancer le serveur.
 
 ## 📌 Utilisation
+
+- Appuyez sur le bouton '+' pour ajouter une tâche à votre liste.
+- Naviguez facilement entre les jours en utilisant les flèches gauche et droite.
+- Obtenez une vue d'ensemble plus complète de votre planning dans l'onglet Agenda.
+- (Autres fonctionnalités à venir.)
 
 ## 📌 Ressources Utilisées
 
