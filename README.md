@@ -1,4 +1,4 @@
-# 🛠 En cours de dévelopemment... 🛠
+# 🛠 En cours de dévelopemment ... 🛠
 
 # mobile todolist
 
