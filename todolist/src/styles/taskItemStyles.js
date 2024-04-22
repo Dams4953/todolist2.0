@@ -25,9 +25,10 @@ export const taskItemStyles = StyleSheet.create({
     taskDescription: {
         marginLeft: 20,
         bottom: 25,
+        padding: -30,
     },
     edit: {
-        left: 310,
+        left: 330,
         top: 14,
         marginTop: 11,
     },

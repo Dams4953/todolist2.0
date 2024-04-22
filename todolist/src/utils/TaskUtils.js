@@ -1,7 +1,3 @@
-import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
-import { mainScreenStyles } from '../styles/mainScreenStyles';
-
 export const handleUpdateTask = (index, newText, newDate, tasks, setTasks) => {
     if (setTasks && typeof setTasks === 'function') {
         const updatedTasks = [...tasks];
@@ -23,15 +19,5 @@ export const handleDeleteTask = (index, tasks, setTasks) => {
     }
 };
 
-const CustomButton = ({ onPress }) => {
-    return (
-        <TouchableOpacity style={mainScreenStyles.buttonContainer} onPress={onPress}>
-            <Text style={mainScreenStyles.buttonText}>+</Text>
-        </TouchableOpacity>
-        
-    );
-};
-
-export default CustomButton;
 
 

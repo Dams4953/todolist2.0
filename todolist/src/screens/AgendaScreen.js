@@ -1,14 +1,12 @@
 import { Calendar } from 'react-native-calendars';
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import TaskListByDate from '../utils/dateUtils';
-import { useTaskContext } from '../utils/TaskContext'; 
+import { TaskListByDate } from '../utils/dateUtils';
 import { handleUpdateTask, handleDeleteTask } from '../utils/TaskUtils';
 
-const AgendaScreen = () => {
-  const { tasks, setTasks } = useTaskContext();
-  const [selectedDay, setSelectedDay] = React.useState(new Date());
-  
+const AgendaScreen = ({ tasks, setTasks }) => {
+  const [selectedDay, setSelectedDay] = useState(new Date());
+
   const onDeleteTask = (index) => {
     handleDeleteTask(index, tasks, setTasks);
   };
@@ -31,18 +29,24 @@ const AgendaScreen = () => {
 
   return (
     <View style={styles.container}>
-         <ScrollView style={styles.scrollView}>
-      <Calendar
-        style={styles.calendar}
-        onDayPress={handleDayPress}
-        markedDates={{
-          [selectedDay]: { selected: true, marked: true }
-        }}
-        theme={calendarTheme}
-      />
+      <ScrollView style={styles.scrollView}>
+        <Calendar
+          style={styles.calendar}
+          onDayPress={handleDayPress}
+          markedDates={{
+            [selectedDay]: { selected: true, marked: true }
+          }}
+          theme={calendarTheme}
+        />
 
-      <Text style={styles.dateText}>Tâches pour le {selectedDay.toLocaleDateString()}</Text>
-        <TaskListByDate date={selectedDay} tasks={tasks} onUpdateTask={onUpdateTask} onDeleteTask={onDeleteTask} />
+        <Text style={styles.dateText}>Tâches pour le {selectedDay.toLocaleDateString()}</Text>
+
+        <TaskListByDate
+          date={selectedDay}
+          tasks={tasks}
+          onUpdateTask={onUpdateTask}
+          onDeleteTask={onDeleteTask} />
+
       </ScrollView>
     </View>
   );
@@ -51,7 +55,7 @@ const AgendaScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
- 
+
   },
   calendar: {
     marginBottom: 20,
@@ -64,7 +68,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   scrollView: {
-    flex: 1, 
+    flex: 1,
     width: '100%',
   },
 });

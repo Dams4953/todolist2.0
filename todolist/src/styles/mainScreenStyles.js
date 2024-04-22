@@ -10,25 +10,7 @@ export const mainScreenStyles = StyleSheet.create({
   contentContainer: {
     flex: 1,
   },
-  buttonContainer: {
-    backgroundColor: '#5396ac',
-    borderRadius: 25,
-    width: 50,
-    height: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-    bottom: 100,
-    borderWidth: 5,
-    borderStyle: 'solid',
-    borderColor: 'white',
-    right: 171,
-    zIndex: 999,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 30,
-  },
+  
   modalContainer: {
     flex: 1,
     justifyContent: 'center',

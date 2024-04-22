@@ -4,7 +4,6 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import MainScreen from './src/screens/MainScreen';
 import AgendaScreen from './src/screens/AgendaScreen';
-import { TaskProvider } from './src/utils/TaskContext';
 import AddTask from './src/components/AddTask';
 
 const Tab = createBottomTabNavigator();
@@ -19,56 +18,54 @@ const App = () => {
     };
 
     return (
-        <TaskProvider>
-            <NavigationContainer>
-                <View style={styles.container}>
-                    <CustomButton onPress={() => setIsModalVisible(true)} />
-                    {isModalVisible && (
-                        <AddTask onAddTask={handleAddTask} onClose={() => setIsModalVisible(false)} />
-
-                    )}
-                </View>
-                <Tab.Navigator
-                    screenOptions={{
-                        headerShown: false,
-                        tabBarActiveTintColor: '#5396ac',
-                        tabBarStyle: {
-                            flexDirection: 'row',
-                            justifyContent: 'space-around',
-                            alignItems: 'center',
-                            backgroundColor: '#FFFFFF',
-                            height: 125,
-                            paddingBottom: 40,
-                        },
+        <NavigationContainer>
+            <View style={styles.container}>
+                <CustomButton onPress={() => setIsModalVisible(true)} />
+                {isModalVisible && (
+                    <AddTask onAddTask={handleAddTask} onClose={() => setIsModalVisible(false)} />
+                )}
+            </View>
+            <Tab.Navigator
+                screenOptions={{
+                    headerShown: false,
+                    tabBarActiveTintColor: '#5396ac',
+                    tabBarStyle: {
+                        flexDirection: 'row',
+                        justifyContent: 'space-around',
+                        alignItems: 'center',
+                        backgroundColor: '#FFFFFF',
+                        height: 125,
+                        paddingBottom: 40,
+                    },
+                }}
+            >
+                <Tab.Screen
+                    name="Accueil"
+                    options={{
+                        tabBarLabel: ({ color, focused }) => (
+                            <Text style={{ color, fontWeight: focused ? 'bold' : 'normal', fontSize: 22 }}>
+                                Accueil
+                            </Text>
+                        ),
                     }}
                 >
-                    <Tab.Screen
-                        name="Accueil"
-                        options={{
-                            tabBarLabel: ({ color, focused }) => (
-                                <Text style={{ color, fontWeight: focused ? 'bold' : 'normal', fontSize: 22 }}>
-                                    Accueil
-                                </Text>
-                            ),
-                        }}
-                    >
-                        {({ route }) => <MainScreen handleAddTask={handleAddTask} />}
-                    </Tab.Screen>
+                    {({ route }) => <MainScreen tasks={tasks} setTasks={setTasks} />}
+                </Tab.Screen>
 
-                    <Tab.Screen
-                        name="Agenda"
-                        component={AgendaScreen}
-                        options={({ route }) => ({
-                            tabBarLabel: ({ color, focused }) => (
-                                <Text style={{ color, fontWeight: focused ? 'bold' : 'normal', fontSize: 22 }}>
-                                    Agenda
-                                </Text>
-                            ),
-                        })}
-                    />
-                </Tab.Navigator>
-            </NavigationContainer>
-        </TaskProvider>
+                <Tab.Screen
+                    name="Agenda"
+                    options={({ route }) => ({
+                        tabBarLabel: ({ color, focused }) => (
+                            <Text style={{ color, fontWeight: focused ? 'bold' : 'normal', fontSize: 22 }}>
+                                Agenda
+                            </Text>
+                        ),
+                    })}
+                >
+                    {({ route }) => <AgendaScreen tasks={tasks} setTasks={setTasks} />}
+                </Tab.Screen>
+            </Tab.Navigator>
+        </NavigationContainer>
     );
 };
 

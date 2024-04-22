@@ -34,10 +34,6 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
         setIsModalVisible(!isModalVisible);
     };
 
-    const handleEdit = () => {
-        setIsEditing(true);
-    };
-
     const handleEditDate = () => {
         setIsEditing(true);
         onShowDatePicker();
@@ -62,10 +58,6 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
         if (!isChecked) {
             setIsTaskVisible(false);
         }
-    };
-
-    const handleTaskPress = () => {
-        toggleDescriptionModal();
     };
 
     const handleContainerPress = (event) => {
@@ -97,6 +89,11 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
     };
 
     const renderTask = () => {
+
+        const handleTaskPress = () => {
+            toggleDescriptionModal();
+        };
+
         return (
             <Animated.View style={[taskItemStyles.taskItem, { opacity: opacity }]}>
                 <TouchableOpacity style={taskItemStyles.edit} onPress={toggleModal}>
