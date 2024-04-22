@@ -14,7 +14,7 @@
 
 ### Description
 
-Une application mobile de gestion de tâches incontournable, offrant une expérience fluide pour créer, organiser et suivre votre liste de tâches où que vous soyez. Priorisez vos engagements et restez productif avec cette todolist intuitive et pratique.
+Une application mobile de gestion de tâches, offrant une expérience fluide pour créer, organiser et suivre votre liste de tâches où que vous soyez.
 
 ### Captures d'Écran
 
