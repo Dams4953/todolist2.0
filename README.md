@@ -1,6 +1,6 @@
 # 🛠 En cours de dévelopemment ... 🛠
 
-# mobile todolist
+# mobile todolist en React Native
 
 ### Sommaire
 
