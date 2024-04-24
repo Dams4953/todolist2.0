@@ -1,6 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
-import TaskItem from '../components/TaskItem';
+import TaskItem from '../components/taskItem/TaskItem';
 
 export const TaskListByDate = ({ date, tasks, onUpdateTask, onDeleteTask }) => {
     const tasksToShow = tasks.filter(task => task.date.toDateString() === date.toDateString());
