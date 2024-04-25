@@ -3,10 +3,8 @@ import { View, Text, TouchableOpacity, TextInput, Animated, Modal } from 'react-
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { taskItemStyles } from '../../styles/taskItemStyles';
 import { Checkbox } from 'expo-checkbox';
-import renderDescriptionModal from './RenderDescription';
 
-
-const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onShowDatePicker }) => {
+const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onShowDatePicker, selectedColor }) => {
     const [editedDescription, setEditedDescription] = useState(item.description);
     const [isEditing, setIsEditing] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
@@ -99,6 +97,9 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
                         onValueChange={handleCheckBoxChange}
                     />
                     <TouchableOpacity onPress={handleTaskPress}>
+                        <View style={[taskItemStyles.colorCircle, { backgroundColor: selectedColor }]}></View>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleTaskPress}>
                         <View style={taskItemStyles.containerTaskItem} onTouchStart={handleContainerPress}>
                             <Text style={[taskItemStyles.taskText, { fontWeight: 'bold' }]}>{item.text}</Text>
                             <Text style={taskItemStyles.taskDate}>{item.date ? new Date(item.date).toDateString() : ''}</Text>
@@ -163,7 +164,28 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
         );
     };
 
+    const renderDescriptionModal = () => {
+        return (
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={isDescriptionModalVisible}
+                onRequestClose={toggleDescriptionModal}
+            >
+                <View style={taskItemStyles.modalContainer}>
+                    <View style={taskItemStyles.modalContent}>
+                        <Text style={taskItemStyles.modalDescription}>{editedDescription}</Text>
+                        <TouchableOpacity onPress={toggleDescriptionModal} style={taskItemStyles.closeButton}>
+                            <Text style={taskItemStyles.closeButtonText}>Close</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modal>
+        );
+    };
+
     return isEditing ? renderEdit() : renderTask();
 };
 
 export default TaskItem;
+
