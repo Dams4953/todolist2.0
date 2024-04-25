@@ -20,6 +20,16 @@ const AgendaScreen = ({ tasks, setTasks }) => {
     setSelectedDay(selectedDate);
   };
 
+  const markDatesWithTasks = () => {
+    const markedDates = {};
+    tasks.forEach(task => {
+      const taskDate = new Date(task.date);
+      const taskDateString = taskDate.toISOString().split('T')[0];
+      markedDates[taskDateString] = { marked: true };
+    });
+    return markedDates;
+  };
+
   const calendarTheme = {
     selectedDayBackgroundColor: '#5396ac',
     selectedDayTextColor: 'white',
@@ -34,6 +44,7 @@ const AgendaScreen = ({ tasks, setTasks }) => {
           style={styles.calendar}
           onDayPress={handleDayPress}
           markedDates={{
+            ...markDatesWithTasks(), 
             [selectedDay]: { selected: true, marked: true }
           }}
           theme={calendarTheme}
@@ -62,8 +73,7 @@ const styles = StyleSheet.create({
     paddingTop: 60,
   },
   dateText: {
-    fontSize: 18,
-    marginTop: 10,
+    fontSize: 15,
     marginBottom: 30,
     alignSelf: 'center',
   },

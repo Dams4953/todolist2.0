@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TouchableOpacity, TextInput, Animated, Modal } from 'react-native';
+import { View, Text, TouchableOpacity, Animated, Modal,TextInput } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { taskItemStyles } from '../../styles/taskItemStyles';
+import { taskItemStyles } from '../styles/taskItemStyles';
 import { Checkbox } from 'expo-checkbox';
 
-const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onShowDatePicker, selectedColor }) => {
+const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onShowDatePicker }) => {
     const [editedDescription, setEditedDescription] = useState(item.description);
     const [isEditing, setIsEditing] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
@@ -97,9 +97,6 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
                         onValueChange={handleCheckBoxChange}
                     />
                     <TouchableOpacity onPress={handleTaskPress}>
-                        <View style={[taskItemStyles.colorCircle, { backgroundColor: selectedColor }]}></View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={handleTaskPress}>
                         <View style={taskItemStyles.containerTaskItem} onTouchStart={handleContainerPress}>
                             <Text style={[taskItemStyles.taskText, { fontWeight: 'bold' }]}>{item.text}</Text>
                             <Text style={taskItemStyles.taskDate}>{item.date ? new Date(item.date).toDateString() : ''}</Text>
@@ -114,14 +111,14 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
         );
     };
 
-    const renderEdit = () => {
+    const renderEdit = (taskDate) => {
         const [editedDate, setEditedDate] = useState(item.date);
         const [editedTask, setEditedTask] = useState(item.text);
 
         const handleSave = () => {
             setIsEditing(false);
             setIsModalVisible(false);
-            onUpdateTask(index, editedTask, editedDescription, editedDate); 
+            onUpdateTask(index, editedTask, editedDescription, editedDate, taskDate); 
         };
 
         const handleCancel = () => {
@@ -130,7 +127,6 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
             setEditedTask(item.text);
             setEditedDate(item.date);
         };
-
         return (
             <Modal
                 animationType="fade"
@@ -162,6 +158,7 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
                 </View>
             </Modal>
         );
+
     };
 
     const renderDescriptionModal = () => {
@@ -184,7 +181,7 @@ const TaskItem = ({ item, index, onUpdateTask, onDeleteTask, isEditingDate, onSh
         );
     };
 
-    return isEditing ? renderEdit() : renderTask();
+    return isEditing ? renderEdit(item.date) : renderTask();
 };
 
 export default TaskItem;

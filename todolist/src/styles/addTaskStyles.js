@@ -9,7 +9,7 @@ export const addTaskStyles = StyleSheet.create({
     },
     containerAddTask: {
         left: 22,
-        top: 125,
+        top: 60,
         paddingTop: 30,
         paddingHorizontal: 20,
         backgroundColor: '#F9F9F9',
@@ -29,6 +29,7 @@ export const addTaskStyles = StyleSheet.create({
     },
     input: {
         height: 40,
+        width: 200,
         borderColor: 'black',
         borderWidth: 1,
         marginBottom: 20,

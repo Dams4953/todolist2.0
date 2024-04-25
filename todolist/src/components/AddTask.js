@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Text } from 'react-native';
+import { View, TextInput, TouchableOpacity, Platform, Text, KeyboardAvoidingView } from 'react-native';
 import { addTaskStyles } from '../styles/addTaskStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -15,7 +15,7 @@ const TodoList = ({ onAddTask }) => {
             return;
         }
         const newTask = {
-            title: task,
+            text: task,
             description: description,
             date: selectedDate,
         };
@@ -81,6 +81,7 @@ const TodoList = ({ onAddTask }) => {
                 <Text style={addTaskStyles.addButtonText}>Ajouter tâche</Text>
             </TouchableOpacity>
         </View>
+        
     );
 };
 

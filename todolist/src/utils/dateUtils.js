@@ -1,9 +1,16 @@
 import React from 'react';
 import { View } from 'react-native';
-import TaskItem from '../components/taskItem/TaskItem';
+import TaskItem from '../components/TaskItem';
 
 export const TaskListByDate = ({ date, tasks, onUpdateTask, onDeleteTask }) => {
-    const tasksToShow = tasks.filter(task => task.date.toDateString() === date.toDateString());
+    const tasksToShow = tasks.filter(task => {
+        if (task.date instanceof Date) {
+            return task.date.toDateString() === date.toDateString();
+        } else {
+            task.date = new Date(task.date);
+            return task.date.toDateString() === date.toDateString();
+        }
+    });
 
     return (
         <View>
@@ -19,6 +26,7 @@ export const TaskListByDate = ({ date, tasks, onUpdateTask, onDeleteTask }) => {
         </View>
     );
 };
+
 
 
 export const getDateLabel = (date) => {

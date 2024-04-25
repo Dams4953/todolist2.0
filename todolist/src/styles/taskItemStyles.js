@@ -10,6 +10,7 @@ export const taskItemStyles = StyleSheet.create({
         marginLeft: 0,
         borderTopRightRadius: 30,
         borderBottomRightRadius: 30,
+        width: 400,
 
     },
     taskText: {

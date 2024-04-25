@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { mainScreenStyles } from '../styles/mainScreenStyles';
 import { handleUpdateTask, handleDeleteTask } from '../utils/TaskUtils';
@@ -21,11 +21,23 @@ const MainScreen = ({ tasks, setTasks }) => {
 
     const onDeleteTask = (index) => {
         handleDeleteTask(index, tasks, setTasks);
-      };
-    
-      const onUpdateTask = (index, newText, newDate) => {
+    };
+
+    const onUpdateTask = (index, newText, newDate) => {
         handleUpdateTask(index, newText, newDate, tasks, setTasks);
-      };
+    };
+
+    const onScrollEnd = (event) => {
+        const contentOffsetX = event.nativeEvent.contentOffset.x;
+        const contentSizeWidth = event.nativeEvent.contentSize.width;
+        const layoutMeasurementWidth = event.nativeEvent.layoutMeasurement.width;
+
+        const deletionThreshold = 50;
+
+        if (contentOffsetX + layoutMeasurementWidth >= contentSizeWidth - deletionThreshold) {
+            onDeleteTask(tasks.length - 1);
+        }
+    };
 
     return (
         <View style={mainScreenStyles.fullScreen}>
@@ -40,12 +52,19 @@ const MainScreen = ({ tasks, setTasks }) => {
                             <Text style={mainScreenStyles.navigationButtonText}>{">"}</Text>
                         </TouchableOpacity>
                     </View>
-                    <TaskListByDate
-                        date={currentDate}
-                        tasks={tasks}
-                        onDeleteTask={onDeleteTask}
-                        onUpdateTask={onUpdateTask}
-                    />
+                    <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={mainScreenStyles.contentContainer}
+                        onScrollEndDrag={onScrollEnd} 
+                    >
+                        <TaskListByDate
+                            date={currentDate}
+                            tasks={tasks}
+                            onDeleteTask={onDeleteTask}
+                            onUpdateTask={onUpdateTask}
+                        />
+                    </ScrollView>
                 </View>
             </ScrollView>
         </View>
